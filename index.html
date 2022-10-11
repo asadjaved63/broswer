@@ -1,0 +1,18 @@
+
+var isRefresh = true;
+var count = 0;
+var d1 = new Date (),
+    d2 = new Date ( d1 );
+var windowsCloseEventListener = window.attachEvent || window.addEventListener;
+var chkForBrowserCloseEvents = window.attachEvent ? 'onbeforeunload' : 'beforeunload';
+windowsCloseEventListener(chkForBrowserCloseEvents, function (e) {
+    d2.setMinutes ( d1.getMinutes() + 5 );
+    localStorage.setItem("lastTime", d2);
+    var sessionAlive = sessionStorage.getItem("sessionAlive");
+if (sessionAlive === null) {
+    sessionStorage.setItem("sessionAlive", true);
+}
+});
+if(!sessionStorage.getItem("sessionAlive")){
+    console.log('inside here')
+}
